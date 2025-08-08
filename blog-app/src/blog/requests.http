@@ -16,12 +16,13 @@ Content-Type: application/json
 }
 
 ### Update a post
-PATCH http://localhost:1338/posts/1
+PATCH http://localhost:1338/posts/7
 Content-Type: application/json
 
 {
+  "id": 1,
   "title": "Updated title"
 }
 
 ### Delete a post
-DELETE http://localhost:1338/posts/1
+DELETE http://localhost:1338/posts/6

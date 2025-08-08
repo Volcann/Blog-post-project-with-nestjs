@@ -1,42 +1,27 @@
 import {
   Controller,
-  Get,
   Post as PostMethod,
+  Get,
   Body,
-  Param,
-  Patch,
-  Delete,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { BlogService } from './blog.service';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('posts')
 export class BlogController {
-  constructor(private readonly blogService: BlogService) {}
+  constructor(private blogService: BlogService) {}
 
-  @Get()
-  findAll() {
-    return this.blogService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.blogService.findOne(+id);
-  }
-
+  @UseGuards(JwtAuthGuard)
   @PostMethod()
-  create(@Body() dto: CreatePostDto) {
-    return this.blogService.create(dto);
+  createPost(@Body() body: { title: string; content: string }, @Request() req) {
+    return this.blogService.createPost(body.title, body.content, req.user);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() dto: UpdatePostDto) {
-    return this.blogService.update(+id, dto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.blogService.remove(+id);
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  getPosts() {
+    return this.blogService.findAll();
   }
 }
