@@ -1,0 +1,27 @@
+### Get all posts
+GET http://localhost:1338/posts
+Accept: application/json
+
+### Get a specific post
+GET http://localhost:1338/posts/1
+Accept: application/json
+
+### Create a new post
+POST http://localhost:1338/posts
+Content-Type: application/json
+
+{
+  "title": "My First Post",
+  "content": "This is the content"
+}
+
+### Update a post
+PATCH http://localhost:1338/posts/1
+Content-Type: application/json
+
+{
+  "title": "Updated title"
+}
+
+### Delete a post
+DELETE http://localhost:1338/posts/1
