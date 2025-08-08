@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BlogModule } from './blog/blog.module';
-import { Post } from './blog/post.entity';
+import { BlogModule } from '../blog/blog.module';
+import { Post } from '../blog/post.entity';
 
 @Module({
   imports: [
